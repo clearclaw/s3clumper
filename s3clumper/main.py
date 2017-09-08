@@ -31,10 +31,11 @@ CONFIG = Dict ({
   "check": False,
   "force": False,
   "nocolour": False,
+  "delete": False,
   "quiet": False,
-  "test": False,
   "time_str": TIME_STR,
   "time_t": TIME_T,
+  "verbose": False,
 })
 IO = CmdIO (conf = CONFIG)
 
@@ -57,21 +58,24 @@ def option_logging (flag):
            tree_view = "-H")
 @clip.flag ("-H", "--HELP",
             help = "Help for all sub-commands")
-@clip.flag ("-D", "--debug", name = "debug", help = "Enable debug logging",
-            callback = option_logging)
-@clip.flag ("-q", "--quiet", name = "quiet",
-            help = "Long-form API responses",
-            callback = partial (option_setopt, "verbose"))
 @clip.flag ("-c", "--check", name = "check",
-            help = "Don't check for target",
+            help = "Don't check for target (may over-write)",
             callback = partial (option_setopt, "check"))
 @clip.flag ("-C", "--nocolour", name = "nocolour",
             help = "Suppress colours in reports",
             callback = partial (option_setopt, "nocolour"))
-@clip.flag ("-t", "--test", name = "test",
-            help = "Test mode (don't do, list what would be done)",
-            callback = partial (option_setopt, "test"))
-@clip.flag ("-v", "--version", name = "version",
+@clip.flag ("-D", "--debug", name = "debug", help = "Enable debug logging",
+            callback = option_logging)
+@clip.flag ("-d", "--delete", name = "delete",
+            help = "Don't delete source files",
+            callback = partial (option_setopt, "delete"))
+@clip.flag ("-q", "--quiet", name = "quiet",
+            help = "Be quiet, be vewy vewy quiet",
+            callback = partial (option_setopt, "verbose"))
+@clip.flag ("-v", "--verbose", name = "verbose",
+            help = "Verbose output",
+            callback = option_version)
+@clip.flag ("-V", "--version", name = "verbose",
             help = "Report installed version",
             callback = option_version)
 @clip.flag ("-z", "--compress", name = "compress",

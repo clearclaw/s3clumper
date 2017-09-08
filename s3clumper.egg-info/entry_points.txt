@@ -1,3 +1,0 @@
-[console_scripts]
-s3clumper = s3clumper.main:main
-

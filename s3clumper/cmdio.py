@@ -26,14 +26,6 @@ class CmdIO (object):
       msg = unicode (msg, encoding = "utf8")
     return clip.echo (msg, nl = nl)
 
-  @logtool.log_call
-  def exit_if_forced (self, msg = None):
-    self.error (msg)
-    if not self.conf.force:
-      self.warn ("Force not passed.  Exiting...")
-      clip.exit (err = True)
-    self.warn ("Force passed.  Continueing after error...")
-
   @logtool.log_call (log_args = False, log_rc = False)
   def colourise (self, msg, colour):
     return (termcolor.colored (msg, colour) if not self.conf.nocolour
