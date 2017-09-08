@@ -78,6 +78,11 @@ class Action (cmdio.CmdIO):
 
   @retryp.retryp (expose_last_exc = True, log_faults = True)
   @logtool.log_call
+  def _get_file (self, client, bucket, key, fhandle):
+    client.download_fileobj (bucket, key, fhandle)
+    fhandle.flush ()
+
+  @logtool.log_call
   def _entar (self, out_f):
     mode = "w" if self.compress else "w:gz"
     client = boto3.client('s3')
@@ -85,8 +90,7 @@ class Action (cmdio.CmdIO):
       for key in (Bar ("Fetching").iter (self.keys)
                   if not self.args.quiet else self.keys):
         with tempfile.NamedTemporaryFile (prefix = "s3clumper_tf__") as f:
-          client.download_fileobj (self.p_from.bucket, key.key, f)
-          f.flush ()
+          self._get_file (client, self.p_from.bucket, key.key, f)
           tar.add (f.name, arcname = key.key)
     out_f.flush ()
     out_f.seek (0)
