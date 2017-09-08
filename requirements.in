@@ -1,0 +1,9 @@
+addict
+boto3
+clip.py
+functools32==3.2.3-2
+logtool
+progress
+retryp
+setuptools-lint
+termcolor

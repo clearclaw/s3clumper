@@ -1,0 +1,3 @@
+include requirements.txt
+include versioneer.py
+include s3clumper/_version.py

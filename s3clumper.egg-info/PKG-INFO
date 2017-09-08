@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: s3clumper
+Version: 0+unknown
+Summary: Aggregate an S3 folder into a fine in another
+Home-page: https://pypi.python.org/pypi/s3clumper
+Author: J C Lawrence
+Author-email: claw@kanga.nu
+License: LGPL v3.0
+Description: UNKNOWN
+Keywords: S3 aggregate tarball compress
+Platform: UNKNOWN
