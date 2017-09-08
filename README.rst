@@ -7,7 +7,7 @@ tarball to a stated S3 URL and optionally deletes the source files.
 
 ::
 
-  s3clumper: Aggregate @3 prefixes into tarballs in S3
+  s3clumper: Aggregate S3 prefixes into tarballs in S3
 
   Usage: s3clumper {{arguments}} {{options}}
 
