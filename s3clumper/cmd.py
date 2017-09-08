@@ -34,7 +34,7 @@ class _ProgressPercentage (object):
   def __call__ (self, bytes_amount):
     if not self.quiet:
       with self._lock:
-        self.progress.next (n = int (100 * self._size / bytes_amount))
+        self.progress.next (n = int (100 * bytes_amount / self._size))
 
 class Action (cmdio.CmdIO):
 
