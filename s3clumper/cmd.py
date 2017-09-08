@@ -2,7 +2,7 @@
 
 from __future__ import absolute_import
 import boto3, botocore, clip, logging, logtool, os
-import retryp, tarfile, tempfile, threading, urlparse
+import retryp, StringIO, tarfile, tempfile, threading, urlparse
 from collections import namedtuple
 from progress.bar import Bar
 from . import cmdio
@@ -115,6 +115,9 @@ class Action (cmdio.CmdIO):
       return True
     except botocore.exceptions.ClientError as e:
       if int (e.response['Error']['Code']) == 404:
+        client = boto3.client('s3')
+        client.upload_fileobj (
+          StringIO.StringIO (), self.p_to.bucket, self.p_to.key)
         return False
       raise
 
