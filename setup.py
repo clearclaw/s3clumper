@@ -7,7 +7,7 @@ from io import open
 setup (
     name = "s3clumper",
     version = versioneer.get_version (),
-    description = "Aggregate an S3 folder into a fine in another",
+    description = "Aggregate an S3 folder into a file in another",
     long_description = open ("README.rst", "r", encoding = "utf-8").read (),
     cmdclass = versioneer.get_cmdclass (),
     classifiers = [],
