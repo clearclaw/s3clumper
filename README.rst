@@ -7,7 +7,7 @@ tarball to a stated S3 URL and optionally deletes the source files.
 
 ::
 
-  s3clumper: Datavisor manipulations
+  s3clumper: 
 
   Usage: s3clumper {{arguments}} {{options}}
 

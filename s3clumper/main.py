@@ -54,7 +54,7 @@ def option_logging (flag):
   CONFIG.debug = flag
 
 @APP.main (name = Path (sys.argv[0]).basename (),
-           description = "Datavisor manipulations",
+           description = "Aggregate @3 prefixes into tarballs in S3",
            tree_view = "-H")
 @clip.flag ("-H", "--HELP",
             help = "Help for all sub-commands")
