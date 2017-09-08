@@ -6,6 +6,7 @@ an S3 prefix (preserving interior paths and filenames), posts the
 tarball to a stated S3 URL and optionally deletes the source files.
 
 ::
+
   s3clumper: Datavisor manipulations
 
   Usage: s3clumper {{arguments}} {{options}}
@@ -27,9 +28,10 @@ tarball to a stated S3 URL and optionally deletes the source files.
    - z, --compress  Don't compress the target
 
 Example:
-     
+
 ::
-  $ s3clumper s3://bucket1/data/ s3://bucket2/archive/logs-20170302.tar.gz  
+
+  $ s3clumper s3://bucket1/data/ s3://bucket2/archive/logs-20170302.tar.gz
   Fetching |################################| 55/55
   Sending |################################| 100/100
   Deleting |################################| 55/55
