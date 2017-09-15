@@ -18,14 +18,14 @@ tarball to a stated S3 URL and optionally deletes the source files.
   Options:
     -h, --help      Show this help message and exit
     -H, --HELP      Help for all sub-commands
-    - c, --check     Don't check for target (may over-write)
+    -c, --check     Don't check for target (may over-write)
     -C, --nocolour  Suppress colours in reports
     -D, --debug     Enable debug logging
     -d, --delete    Don't delete source files
     -q, --quiet     Be quiet, be vewy vewy quiet
     -v, --verbose   Verbose output
     -V, --version   Report installed version
-   - z, --compress  Don't compress the target
+    -z, --compress  Don't compress the target
 
 Example:
 
