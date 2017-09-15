@@ -3,6 +3,7 @@ boto3
 clip.py
 functools32==3.2.3-2
 logtool
+path.py
 progress
 retryp
 setuptools-lint

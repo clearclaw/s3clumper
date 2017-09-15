@@ -19,6 +19,7 @@ jmespath==0.9.3           # via boto3, botocore
 lazy-object-proxy==1.2.2  # via astroid
 logtool==0.3.post16
 mccabe==0.5.3             # via pylint
+path.py==10.4
 progress==1.2
 pylint==1.6.4             # via setuptools-lint
 python-dateutil==2.6.1    # via botocore
