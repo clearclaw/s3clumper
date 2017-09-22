@@ -4,7 +4,7 @@ clip.py
 functools32==3.2.3-2
 logtool
 path.py
-progress
+progressbar2
 retryp
 setuptools-lint
 termcolor

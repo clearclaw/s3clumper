@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 
 from __future__ import absolute_import
-import boto3, botocore, clip, logging, logtool, os
+import boto3, botocore, clip, logging, logtool, os, progressbar
 import retryp, StringIO, tarfile, tempfile, threading, urlparse
 from collections import namedtuple
-from progress.bar import Bar
 from . import cmdio
 
 LOG = logging.getLogger (__name__)
@@ -19,7 +18,8 @@ class _ProgressPercentage (object):
     self._size = float (os.path.getsize (filename))
     self._lock = threading.Lock ()
     self.quiet = quiet
-    self.progress = Bar ("Sending", max = 100) if not quiet else None
+    self.progress = (progressbar.ProgressBar (max_value = self._size)
+                     if not quiet else None)
 
   @logtool.log_call
   def __enter__ (self):
@@ -32,9 +32,9 @@ class _ProgressPercentage (object):
 
   @logtool.log_call
   def __call__ (self, bytes_amount):
-    if not self.quiet:
+    if self.progress:
       with self._lock:
-        self.progress.next (n = int (100 * bytes_amount / self._size))
+        self.progress.update (bytes_amount)
 
 class Action (cmdio.CmdIO):
 
@@ -64,7 +64,9 @@ class Action (cmdio.CmdIO):
   @logtool.log_call
   def _cleanup (self):
     if not self.args.delete:
-      for key in (Bar ("Deleting").iter (self.keys)
+      if not self.args.quiet:
+        print "Deleting..."
+      for key in (progressbar.ProgressBar () (self.keys)
                   if not self.args.quiet else self.keys):
         key.delete ()
 
@@ -72,6 +74,8 @@ class Action (cmdio.CmdIO):
   @logtool.log_call
   def _send (self, out_f):
     client = boto3.client('s3')
+    if not self.args.quiet:
+      print "Sending..."
     with _ProgressPercentage (out_f.name, self.args.quiet) as cb:
       client.upload_file (
         out_f.name, self.p_to.bucket, self.p_to.key, Callback = cb)
@@ -87,7 +91,9 @@ class Action (cmdio.CmdIO):
     mode = "w" if self.compress else "w:gz"
     client = boto3.client('s3')
     with tarfile.open (out_f.name, mode = mode) as tar:
-      for key in (Bar ("Fetching").iter (self.keys)
+      if not self.args.quiet:
+        print "Collecting..."
+      for key in (progressbar.ProgressBar () (self.keys)
                   if not self.args.quiet else self.keys):
         with tempfile.NamedTemporaryFile (prefix = "s3clumper_tf__") as f:
           self._get_file (client, self.p_from.bucket, key.key, f)

@@ -20,12 +20,13 @@ lazy-object-proxy==1.2.2  # via astroid
 logtool==0.3.post16
 mccabe==0.5.3             # via pylint
 path.py==10.4
-progress==1.2
+progressbar2==3.34.3
 pylint==1.6.4             # via setuptools-lint
 python-dateutil==2.6.1    # via botocore
+python-utils==2.2.0       # via progressbar2
 retryp==0.3.post9
 s3transfer==0.1.11        # via boto3
 setuptools-lint==0.5.2
-six==1.10.0               # via astroid, logtool, pylint, python-dateutil
+six==1.10.0               # via astroid, logtool, pylint, python-dateutil, python-utils
 termcolor==1.1.0
 wrapt==1.10.8             # via astroid, logtool, retryp
